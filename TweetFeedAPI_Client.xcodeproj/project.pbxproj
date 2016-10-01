@@ -150,6 +150,7 @@
 				1C89BD5E1D9FF57900DD4B36 /* Frameworks */,
 				1C89BD5F1D9FF57900DD4B36 /* Headers */,
 				1C89BD601D9FF57900DD4B36 /* Resources */,
+				1C89BD9B1D9FF7E300DD4B36 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -167,6 +168,7 @@
 				1C89BD671D9FF57900DD4B36 /* Sources */,
 				1C89BD681D9FF57900DD4B36 /* Frameworks */,
 				1C89BD691D9FF57900DD4B36 /* Resources */,
+				1C89BD9C1D9FF82300DD4B36 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -234,6 +236,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1C89BD9B1D9FF7E300DD4B36 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxAlamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Unbox.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		1C89BD9C1D9FF82300DD4B36 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1C89BD5D1D9FF57900DD4B36 /* Sources */ = {

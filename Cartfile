@@ -1,0 +1,6 @@
+github "RxSwiftCommunity/RxAlamofire" "master"
+github "ReactiveX/RxSwift" "3.0.0-beta.1"
+github "Alamofire/Alamofire" ~> 4.0
+github "johnsundell/unbox" "swift3"
+
+github "Quick/Nimble"
