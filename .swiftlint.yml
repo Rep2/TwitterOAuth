@@ -1,0 +1,9 @@
+excluded:
+  - Carthage
+line_length:
+  - 192 # warning
+  - 256 # error
+disabled_rules:
+  - valid_docs
+  - variable_name
+  - force_cast

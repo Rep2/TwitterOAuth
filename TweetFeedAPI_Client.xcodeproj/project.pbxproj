@@ -14,8 +14,9 @@
 		1C89BD941D9FF59C00DD4B36 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD851D9FF59C00DD4B36 /* Helpers.swift */; };
 		1C89BD951D9FF59C00DD4B36 /* TargetTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD861D9FF59C00DD4B36 /* TargetTypes.swift */; };
 		1C89BD961D9FF59C00DD4B36 /* WebGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD871D9FF59C00DD4B36 /* WebGateway.swift */; };
-		1C89BD971D9FF59C00DD4B36 /* TimelineWebGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD891D9FF59C00DD4B36 /* TimelineWebGateway.swift */; };
+		1C89BD971D9FF59C00DD4B36 /* UserListWebGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD891D9FF59C00DD4B36 /* UserListWebGateway.swift */; };
 		1C89BD991D9FF59C00DD4B36 /* TwitterTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD8B1D9FF59C00DD4B36 /* TwitterTarget.swift */; };
+		1C89BD9F1DA0003E00DD4B36 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD9E1DA0003E00DD4B36 /* List.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +40,9 @@
 		1C89BD851D9FF59C00DD4B36 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		1C89BD861D9FF59C00DD4B36 /* TargetTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetTypes.swift; sourceTree = "<group>"; };
 		1C89BD871D9FF59C00DD4B36 /* WebGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebGateway.swift; sourceTree = "<group>"; };
-		1C89BD891D9FF59C00DD4B36 /* TimelineWebGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWebGateway.swift; sourceTree = "<group>"; };
+		1C89BD891D9FF59C00DD4B36 /* UserListWebGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListWebGateway.swift; sourceTree = "<group>"; };
 		1C89BD8B1D9FF59C00DD4B36 /* TwitterTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterTarget.swift; sourceTree = "<group>"; };
+		1C89BD9E1DA0003E00DD4B36 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		1C89BD7C1D9FF59C00DD4B36 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1C89BD9E1DA0003E00DD4B36 /* List.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -122,7 +125,7 @@
 		1C89BD881D9FF59C00DD4B36 /* TwitterAPI */ = {
 			isa = PBXGroup;
 			children = (
-				1C89BD891D9FF59C00DD4B36 /* TimelineWebGateway.swift */,
+				1C89BD891D9FF59C00DD4B36 /* UserListWebGateway.swift */,
 				1C89BD8B1D9FF59C00DD4B36 /* TwitterTarget.swift */,
 			);
 			path = TwitterAPI;
@@ -151,6 +154,7 @@
 				1C89BD5F1D9FF57900DD4B36 /* Headers */,
 				1C89BD601D9FF57900DD4B36 /* Resources */,
 				1C89BD9B1D9FF7E300DD4B36 /* ShellScript */,
+				1C89BD9D1D9FFECE00DD4B36 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -262,12 +266,28 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Unbox.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxAlamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		1C89BD9D1D9FFECE00DD4B36 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -278,9 +298,10 @@
 			files = (
 				1C89BD931D9FF59C00DD4B36 /* GatewayError.swift in Sources */,
 				1C89BD941D9FF59C00DD4B36 /* Helpers.swift in Sources */,
+				1C89BD9F1DA0003E00DD4B36 /* List.swift in Sources */,
 				1C89BD991D9FF59C00DD4B36 /* TwitterTarget.swift in Sources */,
 				1C89BD961D9FF59C00DD4B36 /* WebGateway.swift in Sources */,
-				1C89BD971D9FF59C00DD4B36 /* TimelineWebGateway.swift in Sources */,
+				1C89BD971D9FF59C00DD4B36 /* UserListWebGateway.swift in Sources */,
 				1C89BD951D9FF59C00DD4B36 /* TargetTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +433,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TweetFeedAPI_Client/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -431,6 +456,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TweetFeedAPI_Client/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -446,6 +475,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = TEU2W33Z6N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = TweetFeedAPI_ClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "undabot.TweetFeedAPI-ClientTests";
@@ -459,6 +492,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = TEU2W33Z6N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = TweetFeedAPI_ClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "undabot.TweetFeedAPI-ClientTests";

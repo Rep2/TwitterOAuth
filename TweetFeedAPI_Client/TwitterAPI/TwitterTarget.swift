@@ -9,7 +9,7 @@ extension TwitterClientTarget: WebTarget {
     public static let baseURL = "https://api.twitter.com"
 
     public var url: String {
-        return TwitterTarget.baseURL + path
+        return TwitterClientTarget.baseURL + path
     }
 
     var path: String {
@@ -29,7 +29,7 @@ extension TwitterClientTarget: WebTarget {
     public var parameters: [String: AnyObject]? {
         switch self {
         case .list(_, _):
-            return ["]
+            return [:]
         }
     }
 
