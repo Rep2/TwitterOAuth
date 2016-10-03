@@ -2,9 +2,9 @@ import RxSwift
 
 public class UserListWebGateway {
 
-//    public static func get(query: String, accessToken: String, maxId: String? = nil) -> Observable<Int> {
-//        return WebGateway()
-//            .getResource(TwitterTarget.timeline(queryString: query, maxId: maxId, accessToken: accessToken))
-//    }
+    public static func get(parameters: [String : String]) -> Observable<[List]> {
+        return WebGateway()
+            .getResource(TwitterClientTarget.list(parameters: parameters))
+    }
 
 }

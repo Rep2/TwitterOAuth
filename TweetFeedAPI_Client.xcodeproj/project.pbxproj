@@ -17,6 +17,10 @@
 		1C89BD971D9FF59C00DD4B36 /* UserListWebGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD891D9FF59C00DD4B36 /* UserListWebGateway.swift */; };
 		1C89BD991D9FF59C00DD4B36 /* TwitterTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD8B1D9FF59C00DD4B36 /* TwitterTarget.swift */; };
 		1C89BD9F1DA0003E00DD4B36 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89BD9E1DA0003E00DD4B36 /* List.swift */; };
+		1CE9A8C91DA02748007C215F /* OAuthSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE9A8C81DA02748007C215F /* OAuthSignature.swift */; };
+		1CE9A8CB1DA02AF3007C215F /* OAuthSignatureTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE9A8CA1DA02AF3007C215F /* OAuthSignatureTest.swift */; };
+		1CE9A8CD1DA03C14007C215F /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE9A8CC1DA03C14007C215F /* HMAC.swift */; };
+		1CE9A8D51DA04FFE007C215F /* RandomString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE9A8D41DA04FFE007C215F /* RandomString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,11 @@
 		1C89BD891D9FF59C00DD4B36 /* UserListWebGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListWebGateway.swift; sourceTree = "<group>"; };
 		1C89BD8B1D9FF59C00DD4B36 /* TwitterTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterTarget.swift; sourceTree = "<group>"; };
 		1C89BD9E1DA0003E00DD4B36 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		1CE9A8C81DA02748007C215F /* OAuthSignature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthSignature.swift; sourceTree = "<group>"; };
+		1CE9A8CA1DA02AF3007C215F /* OAuthSignatureTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthSignatureTest.swift; sourceTree = "<group>"; };
+		1CE9A8CC1DA03C14007C215F /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
+		1CE9A8D31DA04271007C215F /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.map; path = TweetFeedAPI_Client/CommonCrypto/module.map; sourceTree = SOURCE_ROOT; };
+		1CE9A8D41DA04FFE007C215F /* RandomString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomString.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,11 +94,15 @@
 		1C89BD641D9FF57900DD4B36 /* TweetFeedAPI_Client */ = {
 			isa = PBXGroup;
 			children = (
+				1CE9A8D21DA04271007C215F /* CommonCrypto */,
 				1C89BD7C1D9FF59C00DD4B36 /* Model */,
 				1C89BD831D9FF59C00DD4B36 /* TransparentDataAccess */,
 				1C89BD881D9FF59C00DD4B36 /* TwitterAPI */,
 				1C89BD651D9FF57900DD4B36 /* TweetFeedAPI_Client.h */,
 				1C89BD661D9FF57900DD4B36 /* Info.plist */,
+				1CE9A8C81DA02748007C215F /* OAuthSignature.swift */,
+				1CE9A8CC1DA03C14007C215F /* HMAC.swift */,
+				1CE9A8D41DA04FFE007C215F /* RandomString.swift */,
 			);
 			path = TweetFeedAPI_Client;
 			sourceTree = "<group>";
@@ -99,6 +112,7 @@
 			children = (
 				1C89BD701D9FF57900DD4B36 /* TweetFeedAPI_ClientTests.swift */,
 				1C89BD721D9FF57900DD4B36 /* Info.plist */,
+				1CE9A8CA1DA02AF3007C215F /* OAuthSignatureTest.swift */,
 			);
 			path = TweetFeedAPI_ClientTests;
 			sourceTree = "<group>";
@@ -129,6 +143,14 @@
 				1C89BD8B1D9FF59C00DD4B36 /* TwitterTarget.swift */,
 			);
 			path = TwitterAPI;
+			sourceTree = "<group>";
+		};
+		1CE9A8D21DA04271007C215F /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				1CE9A8D31DA04271007C215F /* module.map */,
+			);
+			path = CommonCrypto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +219,7 @@
 					1C89BD611D9FF57900DD4B36 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = TEU2W33Z6N;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					1C89BD6A1D9FF57900DD4B36 = {
@@ -269,6 +292,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Unbox.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxAlamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 			);
 			outputPaths = (
 			);
@@ -297,7 +322,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C89BD931D9FF59C00DD4B36 /* GatewayError.swift in Sources */,
+				1CE9A8D51DA04FFE007C215F /* RandomString.swift in Sources */,
 				1C89BD941D9FF59C00DD4B36 /* Helpers.swift in Sources */,
+				1CE9A8CD1DA03C14007C215F /* HMAC.swift in Sources */,
+				1CE9A8C91DA02748007C215F /* OAuthSignature.swift in Sources */,
 				1C89BD9F1DA0003E00DD4B36 /* List.swift in Sources */,
 				1C89BD991D9FF59C00DD4B36 /* TwitterTarget.swift in Sources */,
 				1C89BD961D9FF59C00DD4B36 /* WebGateway.swift in Sources */,
@@ -310,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CE9A8CB1DA02AF3007C215F /* OAuthSignatureTest.swift in Sources */,
 				1C89BD711D9FF57900DD4B36 /* TweetFeedAPI_ClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,6 +456,7 @@
 		1C89BD771D9FF57900DD4B36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = TEU2W33Z6N;
@@ -443,6 +473,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "undabot.TweetFeedAPI-Client";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/TweetFeedAPI_Client/CommonCrypto";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -450,6 +483,7 @@
 		1C89BD781D9FF57900DD4B36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = TEU2W33Z6N;
@@ -466,6 +500,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "undabot.TweetFeedAPI-Client";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/TweetFeedAPI_Client/CommonCrypto";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -523,6 +559,7 @@
 				1C89BD781D9FF57900DD4B36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1C89BD791D9FF57900DD4B36 /* Build configuration list for PBXNativeTarget "TweetFeedAPI_ClientTests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +568,7 @@
 				1C89BD7B1D9FF57900DD4B36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

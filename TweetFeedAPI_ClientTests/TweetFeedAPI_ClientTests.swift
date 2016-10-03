@@ -1,9 +1,15 @@
 import XCTest
 import Nimble
 import Unbox
+import RxSwift
 @testable import TweetFeedAPI_Client
 
 class UserListWebGatewayTest: XCTestCase {
+
+    let consumerSecret = "WLhDdpPK13CizU4nlNbCQhS1XjgY2fIZ4S7ncbj1gvFkZjsuwC"
+
+    let token = "749954229457027072-46SSCvDkNvDVlXZh5Zjf8s62VUfuopB"
+    let tokenSecret = "iUVtoiFPOODppbdFwReZqPoxr0Iy9Kibs3rATL0LvDqOQ"
 
     func test_UnboxList() {
         let response = "{\r\n \"slug\": \"meetup-20100301\",\r\n    \"name\": \"meetup-20100301\",\r\n" +
@@ -24,6 +30,21 @@ class UserListWebGatewayTest: XCTestCase {
         } catch {
             expect(true).toNot(beTrue())
         }
+
+    }
+
+    func test_Request() {
+        var result: [List]?
+
+        waitUntil(timeout: 10) { done in
+            _ = UserListWebGateway
+                .get(consumerSecret: self.consumerSecret, authorizationToken: self.token, authorizationTokenSecret: self.tokenSecret)
+                .subscribe(onNext: { result = $0 },
+                           onError: { print($0) },
+                           onDisposed: { done() })
+        }
+
+        expect(result).toNot(beNil())
 
     }
 

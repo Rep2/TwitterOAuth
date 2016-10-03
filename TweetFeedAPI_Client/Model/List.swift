@@ -16,7 +16,7 @@ extension List: Unboxable {
 
     public init(unboxer: Unboxer) {
         id = unboxer.unbox(key: "id_str")
-        
+
         name = unboxer.unbox(key: "name")
         description = unboxer.unbox(key: "description")
 
