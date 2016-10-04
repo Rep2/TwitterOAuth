@@ -1,36 +1,69 @@
 import Alamofire
 import Foundation
 
-public enum TwitterClientTarget {
-    case list(parameters: [String : String]?)
+public enum TwitterTarget {
+    case token(key: String, secret: String)
+    case timeline(queryString: String, maxId: String?, accessToken: String)
+    case user(id: String, accessToken: String)
+    case list(parameters: [String : String])
+    case listFeed(id: String)
 }
 
-extension TwitterClientTarget: WebTarget {
+extension TwitterTarget: WebTarget {
     public static let baseURL = "https://api.twitter.com"
 
     public var url: String {
-        return TwitterClientTarget.baseURL + path
+        return TwitterTarget.baseURL + path
     }
 
     var path: String {
         switch self {
-        case .list(_):
-            return "/1.1/lists/list.json"
+        case .token:
+            return "/oauth2/token"
+        case .timeline:
+            return "/1.1/search/tweets.json"
+        case .user:
+            return "/1.1/users/show.json"
+        case .list:
+            return TwitterTarget.listURL
+        case .listFeed:
+            return "/1.1/lists/statuses.json"
         }
     }
 
     public var method: HTTPMethod {
         switch self {
+        case .token:
+            return .post
+        case .timeline:
+            return .get
+        case .user:
+            return .get
         case .list:
+            return TwitterTarget.listMethod
+        case .listFeed:
             return .get
         }
     }
 
     public var parameters: [String: AnyObject]? {
         switch self {
+        case .token:
+            return [
+                "grant_type" : "client_credentials" as AnyObject
+            ]
+        case .timeline(let queryParameter, let maxID, _):
+            var params = ["q" : queryParameter.URLEscapedString]
+            params["max_id"] = maxID
+
+            return params as [String : AnyObject]
+        case .user(let id, _):
+            return ["user_id" : id as AnyObject]
         case .list:
             return nil
-         }
+        case .listFeed(let id):
+            return ["list_id" : id as AnyObject]
+        }
     }
 
     public var encoding: URLEncoding {
@@ -42,49 +75,38 @@ extension TwitterClientTarget: WebTarget {
 
     public var headers: [String : String]? {
         switch self {
+        case .token(let key, let secret):
+            return [
+                "Authorization" : "Basic " + createAuthorizationString(for: key, secret: secret),
+                "Content-Type" : "application/x-www-form-urlencoded;charset=UTF-8"
+            ]
+        case .timeline(_, _, let accessToken):
+            return ["Authorization" : "Bearer \(accessToken)"]
         case .list(let parameters):
             return parameters
-
+        case .listFeed(let id):
+            do {
+            let authHeader = try generateOAuthAuthorizationHeader(url: url, method: method, queries: ["list_id" : id])
+                return ["Authorization" : authHeader]
+            } catch {
+                return nil
+            }
+        default:
+            return nil
         }
     }
 
-//            let tw = TWTROAuthSigning(authConfig: TWTRAuthConfig(consumerKey: "uiuctDMe3ZQlCUfWWPFbpzESB", consumerSecret: "WLhDdpPK13CizU4nlNbCQhS1XjgY2fIZ4S7ncbj1gvFkZjsuwC"), authSession: session)
-//
-//            var error: NSError?
-//            let perams = tw.oAuthEchoHeaders(forRequestMethod: "GET", urlString: "https://api.twitter.com/1.1/lists/list.json", parameters: nil, error: &error)
-//
-//
-//            let nounce = randomString(length: 32)
-//            let timestamp = "1475358122"//\(Date.timeIntervalBetween1970AndReferenceDate.rounded())"
-//
-//            var oauthParameters = [
-//                "oauth_consumer_key" : "\(consumerSecret)",
-//                "oauth_nonce" : nounce,
-//                "oauth_signature_method" : "HMAC-SHA1",
-//                "oauth_timestamp" : timestamp,
-//                "oauth_token" : "\(authToken)",
-//                "oauth_version" : "1.0"
-//            ]
-//
-//            do {
-//                let signature = try oauthSignature(consumerSecret: consumerSecret, authTokenSecret: authTokenSecret, baseURL: path, method: method, parameters: oauthParameters)
-//
-//                oauthParameters["oauth_signature"] = signature
-//
-//                let oauthString = oauthParameters
-//                    .sorted(by: <)
-//                    .map({ element -> String in
-//                        return element.key + "=\"" + element.value + "\""
-//                        })
-//                    .joined(separator: ", ")
-//
-//                return ["Authorization" : "OAuth \(oauthString)"]
-//            } catch {
-//                print("Failed to create key")
-//            }
-//
-//            return [:]
-//        }
+    public static var listURL: String {
+        return "/1.1/lists/list.json"
+    }
 
+    public static var listMethod: HTTPMethod {
+        return .get
+    }
 
+}
+
+private func createAuthorizationString(for key: String, secret: String) -> String {
+    let authorizationData = (key + ":" + secret).data(using: String.Encoding.utf8)
+    return authorizationData!.base64EncodedString()
 }

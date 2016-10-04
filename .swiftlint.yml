@@ -4,6 +4,7 @@ line_length:
   - 192 # warning
   - 256 # error
 disabled_rules:
+  - function_parameter_count
   - valid_docs
   - variable_name
   - force_cast
