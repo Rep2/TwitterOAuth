@@ -1,5 +1,6 @@
 import XCTest
 import Nimble
+import RxSwift
 @testable import TweetFeedAPI_Client
 
 class ListFeedWebGatewayTest: XCTestCase {
@@ -10,7 +11,7 @@ class ListFeedWebGatewayTest: XCTestCase {
         var result: [Tweet]?
 
         waitUntil(timeout: 10) { done in
-            _ = ListFeedWebGateway.get(listID: listID)
+            _ = ListFeedWebGateway.get(listID: self.listID)
                 .subscribe(
                     onNext: { result = $0 },
                     onDisposed: { done() })
